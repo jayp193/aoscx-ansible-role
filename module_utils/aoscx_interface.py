@@ -1,5 +1,6 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
+<<<<<<< HEAD
 #
 # (C) Copyright 2019 Hewlett Packard Enterprise Development LP.
 #
@@ -17,6 +18,17 @@
 # under the License.
 
 from ansible.module_utils.aoscx import ArubaAnsibleModule
+=======
+
+# (C) Copyright 2019-2020 Hewlett Packard Enterprise Development LP.
+# GNU General Public License v3.0+
+# (see COPYING or https://www.gnu.org/licenses/gpl-3.0.txt)
+
+from __future__ import (absolute_import, division, print_function)
+__metaclass__ = type
+
+
+>>>>>>> b72fff9... Adds 10.4 support to modules
 from ansible.module_utils.aoscx_port import Port
 from ansible.module_utils.aoscx_vrf import VRF
 from random import randint
@@ -33,8 +45,19 @@ def number_unit(s):
 
 class Interface:
 
+<<<<<<< HEAD
     def create_interface(self, aruba_ansible_module, interface_name):
         if not aruba_ansible_module.running_config.has_key('Interface'):
+=======
+    def create_interface(self, aruba_ansible_module, interface_name,
+                         type=None):
+
+        if aruba_ansible_module.switch_platform.startswith("6") and (type is None):  # NOQA
+
+            return aruba_ansible_module
+
+        if 'Interface' not in aruba_ansible_module.running_config.keys():
+>>>>>>> b72fff9... Adds 10.4 support to modules
             aruba_ansible_module.running_config['Interface'] = {}
 
         encoded_interface_name = interface_name.replace('/', "%2F")
@@ -57,8 +80,27 @@ class Interface:
 
         return True
 
+<<<<<<< HEAD
 
     def delete_interface(self, aruba_ansible_module, interface_name):
+=======
+    def delete_interface(self, aruba_ansible_module, interface_name,
+                         type=None):
+
+        if aruba_ansible_module.switch_platform.startswith("6") and (type is None):  # NOQA
+            if self.check_interface_exists(aruba_ansible_module,
+                                           interface_name):
+                encoded_interface_name = interface_name.replace('/', "%2F")
+                user_config = {"admin": "down", }
+
+                aruba_ansible_module.running_config['Interface'][encoded_interface_name] = {  # NOQA
+                    "name": interface_name,
+                    "user_config": user_config
+
+                }
+
+            return aruba_ansible_module
+>>>>>>> b72fff9... Adds 10.4 support to modules
 
         if  self.check_interface_exists(aruba_ansible_module, interface_name):
             encoded_interface_name = interface_name.replace('/', "%2F")
@@ -117,10 +159,30 @@ class Interface:
     def update_interface_qos_profile(self, aruba_ansible_module, interface_name, qos_profile_details, update_type='insert'):
         port = Port()
         if (update_type == 'insert') or (update_type == 'update'):
+<<<<<<< HEAD
             if not aruba_ansible_module.running_config.has_key('QoS'):
                 aruba_ansible_module.module.fail_json("Qos schedule profile being attached to interface {} is not configured".format(interface_name))
             elif not aruba_ansible_module.running_config['QoS'].has_key(qos_profile_details):
                 aruba_ansible_module.module.fail_json("Qos schedule profile being attached to interface {} is not configured".format(interface_name))
+=======
+            if 'QoS' not in aruba_ansible_module.running_config.keys():
+                aruba_ansible_module.module.fail_json(msg="Qos schedule "
+                                                          "profile being "
+                                                          "attached to "
+                                                          "interface {int} is "
+                                                          "not configured"
+                                                          "".format(int=interface_name)  # NOQA
+                                                      )  # NOQA
+            elif qos_profile_details not in aruba_ansible_module.running_config['QoS'].keys():  # NOQA
+                aruba_ansible_module.module.fail_json(msg="Qos schedule "
+                                                          "profile "
+                                                          "being attached to "
+                                                          "interface {int} "
+                                                          "is not "
+                                                          "configured"
+                                                          "".format(int=interface_name)  # NOQA
+                                                      )  # NOQA
+>>>>>>> b72fff9... Adds 10.4 support to modules
             else:
                 port_fields = {
                     'qos' : qos_profile_details
@@ -189,7 +251,18 @@ class L2_Interface:
             }
             aruba_ansible_module = port.update_port_fields(aruba_ansible_module, interface_name, port_fields)
         else:
+<<<<<<< HEAD
             aruba_ansible_module.module.fail_json(msg="Interface {} is currently an L3 interface. Delete interface then configure as L2.".format(interface_name))
+=======
+            aruba_ansible_module.module.fail_json(msg="Interface {int} is "
+                                                      "currently an L3 "
+                                                      "interface. Delete "
+                                                      "interface then "
+                                                      "configure"
+                                                      " as L2."
+                                                      "".format(int=interface_name)  # NOQA
+                                                  )  # NOQA
+>>>>>>> b72fff9... Adds 10.4 support to modules
 
         return aruba_ansible_module
 
@@ -218,8 +291,20 @@ class L2_Interface:
         port = Port()
         interface = L2_Interface()
 
+<<<<<<< HEAD
         if not interface.check_if_l2_interface_possible(aruba_ansible_module, interface_name):
             aruba_ansible_module.module.fail_json(msg="Interface {} is configured as an L3 interface. Delete interface then configure as L2.".format(interface_name))
+=======
+        if not interface.check_if_l2_interface_possible(aruba_ansible_module,
+                                                        interface_name):
+            aruba_ansible_module.module.fail_json(msg="Interface {int} is "
+                                                      "configured as an L3 "
+                                                      "interface. Delete "
+                                                      "interface then "
+                                                      "configure as L2."
+                                                      "".format(int=interface_name)  # NOQA
+                                                  )  # NOQA
+>>>>>>> b72fff9... Adds 10.4 support to modules
         if not port.check_port_exists(aruba_ansible_module, interface_name):
             aruba_ansible_module.module.fail_json(msg="Interface {} is not configured".format(interface_name))
 
@@ -254,16 +339,35 @@ class L3_Interface:
         if self.check_if_l3_interface_possible(aruba_ansible_module, interface_name):
             interface = Interface()
             port = Port()
+<<<<<<< HEAD
             aruba_ansible_module = interface.create_interface(aruba_ansible_module, interface_name)
             aruba_ansible_module = port.create_port(aruba_ansible_module, interface_name)
+=======
+            aruba_ansible_module = interface.create_interface(aruba_ansible_module, interface_name, type='l3')  # NOQA
+            aruba_ansible_module = port.create_port(aruba_ansible_module,
+                                                    interface_name)
+>>>>>>> b72fff9... Adds 10.4 support to modules
             encoded_interface_name = interface_name.replace("/", "%2F")
             interfaces = [encoded_interface_name]
             port_fields = {
-                "interfaces": interfaces
+                "interfaces": interfaces,
+                "routing": True
             }
             aruba_ansible_module = port.update_port_fields(aruba_ansible_module, interface_name, port_fields)
         else:
+<<<<<<< HEAD
             aruba_ansible_module.module.fail_json("Interface {} is currently an L2 interface. Delete interface then configure as L3.".format(interface_name))
+=======
+            aruba_ansible_module.module.fail_json(msg="Interface {int} is "
+                                                      "currently "
+                                                      "an L2 interface. "
+                                                      "Delete "
+                                                      "interface then "
+                                                      "configure as"
+                                                      " L3."
+                                                      "".format(int=interface_name)  # NOQA
+                                                  )
+>>>>>>> b72fff9... Adds 10.4 support to modules
 
         return aruba_ansible_module
 
@@ -277,7 +381,19 @@ class L3_Interface:
     def check_if_l3_interface_possible(self, aruba_ansible_module, interface_name):
         port = Port()
         if port.check_port_exists(aruba_ansible_module, interface_name):
+<<<<<<< HEAD
             result = port.get_port_field_values(aruba_ansible_module, interface_name, ['vrf', 'routing'])
+=======
+            result = port.get_port_field_values(aruba_ansible_module,
+                                                interface_name, ['vrf',
+                                                                 'routing',
+                                                                 'vlan_tag'])
+
+            if 'vlan_tag' in result.keys():
+                if result['vlan_tag'] != "":
+                    return False
+
+>>>>>>> b72fff9... Adds 10.4 support to modules
             if 'vrf' in result.keys():
                 return True
             if 'routing' in result.keys():
@@ -292,7 +408,14 @@ class L3_Interface:
         port = Port()
         vrf = VRF()
         if not port.check_port_exists(aruba_ansible_module, interface_name):
+<<<<<<< HEAD
             aruba_ansible_module.module.fail_json(msg="Interface {} is not configured".format(interface_name))
+=======
+            aruba_ansible_module.module.fail_json(msg="Interface {int} is not "
+                                                      "configured"
+                                                      "".format(int=interface_name)  # NOQA
+                                                  )
+>>>>>>> b72fff9... Adds 10.4 support to modules
 
         result = port.get_port_field_values(aruba_ansible_module,
                                             interface_name,
@@ -320,7 +443,14 @@ class L3_Interface:
         port = Port()
         vrf = VRF()
         if not port.check_port_exists(aruba_ansible_module, interface_name):
+<<<<<<< HEAD
             aruba_ansible_module.module.fail_json(msg="Interface {} is not configured".format(interface_name))
+=======
+            aruba_ansible_module.module.fail_json(msg="Interface {int} is not "
+                                                      "configured"
+                                                      "".format(int=interface_name)  # NOQA
+                                                  )
+>>>>>>> b72fff9... Adds 10.4 support to modules
 
         result = port.get_port_field_values(aruba_ansible_module,
                                             interface_name,
@@ -328,8 +458,17 @@ class L3_Interface:
         if 'vrf' in result.keys():
             if result['vrf'] != "" and result['vrf'] != vrf_name:
                 aruba_ansible_module.module.fail_json(
+<<<<<<< HEAD
                     msg=("Interface {} is attached to VRF {}. Delete interface and recreate with VRF {}".format(
                         interface_name, result['vrf'], vrf_name)))
+=======
+                    msg=("Interface {int} is attached to VRF {vrf}. "
+                         "Delete interface"
+                         " and recreate with VRF "
+                         "{vrf_name}".format(int=interface_name,
+                                             vrf=result['vrf'],
+                                             vrf_name=vrf_name)))
+>>>>>>> b72fff9... Adds 10.4 support to modules
 
         if not vrf.check_vrf_exists(aruba_ansible_module, vrf_name):
             if vrf_name != "default":

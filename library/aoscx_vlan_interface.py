@@ -1,5 +1,6 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
+<<<<<<< HEAD
 #
 # (C) Copyright 2019 Hewlett Packard Enterprise Development LP.
 #
@@ -15,6 +16,17 @@
 # KIND, either express or implied. See the License for the
 # specific language governing permissions and limitations
 # under the License.
+=======
+
+# (C) Copyright 2019-2020 Hewlett Packard Enterprise Development LP.
+# GNU General Public License v3.0+
+# (see COPYING or https://www.gnu.org/licenses/gpl-3.0.txt)
+
+
+from __future__ import (absolute_import, division, print_function)
+__metaclass__ = type
+
+>>>>>>> b72fff9... Adds 10.4 support to modules
 
 ANSIBLE_METADATA = {
     'metadata_version': '1.1',
@@ -162,7 +174,8 @@ def main():
         aruba_ansible_module = port.create_port(aruba_ansible_module,
                                                 vlan_interface_id)
         aruba_ansible_module = interface.create_interface(aruba_ansible_module,
-                                                          vlan_interface_id)
+                                                          vlan_interface_id,
+                                                          type='vlan')
 
         if admin_state is None:
             admin_state = 'up'
@@ -246,7 +259,8 @@ def main():
         aruba_ansible_module = port.delete_port(aruba_ansible_module,
                                                 vlan_interface_id)
         aruba_ansible_module = interface.delete_interface(aruba_ansible_module,
-                                                          vlan_interface_id)
+                                                          vlan_interface_id,
+                                                          type='vlan')
 
     aruba_ansible_module.update_switch_config()
 

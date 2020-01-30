@@ -1,5 +1,6 @@
 # !/usr/bin/python
 # -*- coding: utf-8 -*-
+<<<<<<< HEAD
 #
 # (C) Copyright 2019 Hewlett Packard Enterprise Development LP.
 #
@@ -15,6 +16,17 @@
 # KIND, either express or implied. See the License for the
 # specific language governing permissions and limitations
 # under the License.
+=======
+
+# (C) Copyright 2019-2020 Hewlett Packard Enterprise Development LP.
+# GNU General Public License v3.0+
+# (see COPYING or https://www.gnu.org/licenses/gpl-3.0.txt)
+
+
+from __future__ import (absolute_import, division, print_function)
+__metaclass__ = type
+
+>>>>>>> b72fff9... Adds 10.4 support to modules
 
 from ansible.module_utils.aoscx import ArubaAnsibleModule
 
@@ -93,9 +105,16 @@ class VRF:
 
     def update_vrf_dns_domain_list(self, aruba_ansible_module, vrf_name, dns_domain_list, update_type="insert"):
 
+<<<<<<< HEAD
         if not self.check_vrf_exists(aruba_ansible_module, vrf_name) and (update_type == 'insert'):
             aruba_ansible_module.module.fail_json(
                 "VRF {} is not configured".format(vrf_name))
+=======
+        if not self.check_vrf_exists(aruba_ansible_module, vrf_name) and (update_type == 'insert'):  # NOQA
+            aruba_ansible_module.module.fail_json(msg="VRF {vrf} is not "
+                                                      "configured"
+                                                      "".format(vrf=vrf_name))
+>>>>>>> b72fff9... Adds 10.4 support to modules
             return aruba_ansible_module
 
         elif not self.check_vrf_exists(aruba_ansible_module, vrf_name) and (update_type == 'delete'):
@@ -113,9 +132,16 @@ class VRF:
 
     def update_vrf_dns_name_servers(self, aruba_ansible_module, vrf_name, dns_name_servers, update_type="insert"):
 
+<<<<<<< HEAD
         if not self.check_vrf_exists(aruba_ansible_module, vrf_name) and (update_type == 'insert'):
             aruba_ansible_module.module.fail_json(
                 "VRF {} is not configured".format(vrf_name))
+=======
+        if not self.check_vrf_exists(aruba_ansible_module, vrf_name) and (update_type == 'insert'):  # NOQA
+            aruba_ansible_module.module.fail_json(msg="VRF {vrf} is not "
+                                                      "configured"
+                                                      "".format(vrf=vrf_name))
+>>>>>>> b72fff9... Adds 10.4 support to modules
             return aruba_ansible_module
         elif not self.check_vrf_exists(aruba_ansible_module, vrf_name) and (update_type == 'delete'):
             aruba_ansible_module.warnings.append(
@@ -131,6 +157,7 @@ class VRF:
         return aruba_ansible_module
 
 
+<<<<<<< HEAD
     def update_vrf_dns_host_v4_address_mapping(self, aruba_ansible_module, vrf_name, dns_host_v4_address_mapping, update_type="insert"):
 
         if not self.check_vrf_exists(aruba_ansible_module, vrf_name) and (update_type == 'insert'):
@@ -141,6 +168,18 @@ class VRF:
         elif not self.check_vrf_exists(aruba_ansible_module, vrf_name) and (update_type == 'delete'):
             aruba_ansible_module.warnings.append(
                 "VRF {} is not configured".format(vrf_name))
+=======
+        if not self.check_vrf_exists(aruba_ansible_module, vrf_name) and (update_type == 'insert'):  # NOQA
+            aruba_ansible_module.module.fail_json(msg="VRF {vrf} is not "
+                                                      "configured"
+                                                      "".format(vrf=vrf_name))
+            return aruba_ansible_module
+
+        elif not self.check_vrf_exists(aruba_ansible_module, vrf_name) and (update_type == 'delete'):  # NOQA
+            aruba_ansible_module.warnings.append(msg="VRF {vrf} is not "
+                                                     "configured"
+                                                     "".format(vrf=vrf_name))
+>>>>>>> b72fff9... Adds 10.4 support to modules
             return aruba_ansible_module
 
         if (update_type == 'insert') or (update_type == 'update'):
@@ -152,11 +191,18 @@ class VRF:
         return aruba_ansible_module
 
 
+<<<<<<< HEAD
     def update_vrf_dns_host_v6_address_mapping(self, aruba_ansible_module, vrf_name, dns_host_v6_address_mapping, update_type="insert"):
 
         if not self.check_vrf_exists(aruba_ansible_module, vrf_name) and (update_type == 'insert'):
             aruba_ansible_module.module.fail_json(
                 "VRF {} is not configured".format(vrf_name))
+=======
+        if not self.check_vrf_exists(aruba_ansible_module, vrf_name) and (update_type == 'insert'):  # NOQA
+            aruba_ansible_module.module.fail_json(msg="VRF {vrf} is not "
+                                                      "configured"
+                                                      "".format(vrf=vrf_name))
+>>>>>>> b72fff9... Adds 10.4 support to modules
             return aruba_ansible_module
 
         elif not self.check_vrf_exists(aruba_ansible_module, vrf_name) and (update_type == 'delete'):
@@ -175,8 +221,14 @@ class VRF:
     def enable_disable_vrf_ssh_server(self, aruba_ansible_module, vrf_name, enable_ssh_server=False):
 
         if not self.check_vrf_exists(aruba_ansible_module, vrf_name):
+<<<<<<< HEAD
             aruba_ansible_module.module.fail_json(
                 "VRF {} is not configured".format(vrf_name))
+=======
+            aruba_ansible_module.module.fail_json(msg="VRF {vrf} is not "
+                                                      "configured"
+                                                      "".format(vrf=vrf_name))
+>>>>>>> b72fff9... Adds 10.4 support to modules
             return aruba_ansible_module
 
         aruba_ansible_module.running_config['System']['vrfs'][vrf_name]['ssh_enable'] = enable_ssh_server
@@ -186,8 +238,14 @@ class VRF:
     def check_vrf_snmp_enable(self, aruba_ansible_module, vrf_name):
 
         if not self.check_vrf_exists(aruba_ansible_module, vrf_name):
+<<<<<<< HEAD
             aruba_ansible_module.module.fail_json(
                 "VRF {} is not configured".format(vrf_name))
+=======
+            aruba_ansible_module.module.fail_json(msg="VRF {vrf} is not "
+                                                      "configured"
+                                                      "".format(vrf=vrf_name))
+>>>>>>> b72fff9... Adds 10.4 support to modules
             return aruba_ansible_module
 
         if aruba_ansible_module.running_config['System']['vrfs'][vrf_name]['enable_snmp']:
@@ -198,13 +256,27 @@ class VRF:
     def enable_disable_vrf_snmp(self, aruba_ansible_module, vrf_name, enable_snmp=False):
 
         if not self.check_vrf_exists(aruba_ansible_module, vrf_name):
+<<<<<<< HEAD
             aruba_ansible_module.module.fail_json(
                 "VRF {} is not configured".format(vrf_name))
+=======
+            aruba_ansible_module.module.fail_json(msg="VRF {vrf} is not "
+                                                      "configured"
+                                                      "".format(vrf=vrf_name))
+>>>>>>> b72fff9... Adds 10.4 support to modules
             return aruba_ansible_module
 
         for vrf in aruba_ansible_module.running_config['System']['vrfs'].keys():
             if self.check_vrf_snmp_enable(aruba_ansible_module, vrf):
+<<<<<<< HEAD
                 aruba_ansible_module.module.fail_json("SNMP is enabled in VRF {}. Only one VRF can have SNMP enabled.")
+=======
+                aruba_ansible_module.module.fail_json(msg="SNMP is enabled in"
+                                                          " VRF {vrf}. Only "
+                                                          "one VRF can have "
+                                                          "SNMP enabled."
+                                                          "".format(vrf=vrf))
+>>>>>>> b72fff9... Adds 10.4 support to modules
 
         aruba_ansible_module.running_config['System']['vrfs'][vrf_name]['enable_snmp'] = enable_snmp
 
@@ -213,8 +285,14 @@ class VRF:
     def enable_disable_vrf_https_server(self, aruba_ansible_module, vrf_name, enable_https_server=False):
 
         if not self.check_vrf_exists(aruba_ansible_module, vrf_name):
+<<<<<<< HEAD
             aruba_ansible_module.module.fail_json(
                 "VRF {} is not configured".format(vrf_name))
+=======
+            aruba_ansible_module.module.fail_json(msg="VRF {vrf} is not "
+                                                      "configured"
+                                                      "".format(vrf=vrf_name))
+>>>>>>> b72fff9... Adds 10.4 support to modules
             return aruba_ansible_module
 
         aruba_ansible_module.running_config['System']['vrfs'][vrf_name]['https_server'] = {
@@ -226,8 +304,14 @@ class VRF:
     def update_vrf_address_family(self, aruba_ansible_module, vrf_name, family_type, route_target_type, route_target,update_type='insert'):
 
         if not self.check_vrf_exists(aruba_ansible_module, vrf_name):
+<<<<<<< HEAD
             aruba_ansible_module.module.fail_json(
                 "VRF {} is not configured".format(vrf_name))
+=======
+            aruba_ansible_module.module.fail_json(msg="VRF {vrf} is not "
+                                                      "configured"
+                                                      "".format(vrf=vrf_name))
+>>>>>>> b72fff9... Adds 10.4 support to modules
             return aruba_ansible_module
 
         # if (update_type == "insert") or (update_type == "update"):

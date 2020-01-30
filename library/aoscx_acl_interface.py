@@ -1,5 +1,6 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
+<<<<<<< HEAD
 #
 # (C) Copyright 2019 Hewlett Packard Enterprise Development LP.
 #
@@ -15,6 +16,17 @@
 # KIND, either express or implied. See the License for the
 # specific language governing permissions and limitations
 # under the License.
+=======
+
+# (C) Copyright 2019-2020 Hewlett Packard Enterprise Development LP.
+# GNU General Public License v3.0+
+# (see COPYING or https://www.gnu.org/licenses/gpl-3.0.txt)
+
+
+from __future__ import (absolute_import, division, print_function)
+__metaclass__ = type
+
+>>>>>>> b72fff9... Adds 10.4 support to modules
 
 ANSIBLE_METADATA = {
     'metadata_version': '1.1',
@@ -85,6 +97,7 @@ RETURN = r''' # '''
 
 from ansible.module_utils.aoscx import ArubaAnsibleModule
 from ansible.module_utils.aoscx_interface import Interface
+from ansible.module_utils.aoscx_port import Port
 
 
 def main():
@@ -106,14 +119,22 @@ def main():
     state = aruba_ansible_module.module.params['state']
 
     interface = Interface()
+    port = Port()
 
     for interface_name in acl_interface_list:
+<<<<<<< HEAD
         if not interface.check_interface_exists(aruba_ansible_module,
                                                 interface_name):
             aruba_ansible_module.module.fail_json(msg="Interface {} is not "
                                                       "configured"
                                                       "".format(interface_name)
                                                   )
+=======
+        if not port.check_port_exists(aruba_ansible_module, interface_name):
+            aruba_ansible_module.module.fail_json(
+                msg="Interface {int} is not configured".format(
+                    int=interface_name))
+>>>>>>> b72fff9... Adds 10.4 support to modules
 
         if (state == 'create') or (state == 'update'):
             update_type = 'insert'

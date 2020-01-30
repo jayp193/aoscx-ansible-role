@@ -1,5 +1,6 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
+<<<<<<< HEAD
 #
 # (C) Copyright 2019 Hewlett Packard Enterprise Development LP.
 #
@@ -15,6 +16,16 @@
 # KIND, either express or implied. See the License for the
 # specific language governing permissions and limitations
 # under the License.
+=======
+
+# (C) Copyright 2019-2020 Hewlett Packard Enterprise Development LP.
+# GNU General Public License v3.0+
+# (see COPYING or https://www.gnu.org/licenses/gpl-3.0.txt)
+
+from __future__ import (absolute_import, division, print_function)
+__metaclass__ = type
+
+>>>>>>> b72fff9... Adds 10.4 support to modules
 
 ANSIBLE_METADATA = {
     'metadata_version': '1.1',
@@ -159,10 +170,12 @@ def main():
 
     if state == 'create' or state == 'update':
         if mgmt_nameservers is not None:
-            mgmt_if_mode = aruba_ansible_module.running_config['System']['mgmt_intf']['mode']  # NOQA
+            if 'mode' in aruba_ansible_module.running_config['System']['mgmt_intf']:    # NOQA
+                mgmt_if_mode = aruba_ansible_module.running_config['System']['mgmt_intf']['mode']  # NOQA
+            else:
+                mgmt_if_mode = 'dhcp'
 
             if mgmt_if_mode != 'static':
-
                 aruba_ansible_module.module.fail_json(msg="The management interface must have static IP to configure management interface name servers")  # NOQA
 
             for k, v in mgmt_nameservers.iteritems():
