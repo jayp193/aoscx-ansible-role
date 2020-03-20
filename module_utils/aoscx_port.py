@@ -1,5 +1,6 @@
-#!/usr/bin/python
+#!/usr/bin/env python
 # -*- coding: utf-8 -*-
+<<<<<<< HEAD
 <<<<<<< HEAD
 #
 # (C) Copyright 2019 Hewlett Packard Enterprise Development LP.
@@ -17,6 +18,8 @@
 # specific language governing permissions and limitations
 # under the License.
 =======
+=======
+>>>>>>> a6a7d002c67b68d39183ff87414400ace9e49fc4
 
 # (C) Copyright 2019-2020 Hewlett Packard Enterprise Development LP.
 # GNU General Public License v3.0+
@@ -26,7 +29,10 @@
 from __future__ import (absolute_import, division, print_function)
 __metaclass__ = type
 
+<<<<<<< HEAD
 >>>>>>> b72fff9... Adds 10.4 support to modules
+=======
+>>>>>>> a6a7d002c67b68d39183ff87414400ace9e49fc4
 
 from ansible.module_utils.aoscx import ArubaAnsibleModule
 
@@ -35,25 +41,25 @@ class Port:
 
     def create_port(self, aruba_ansible_module, port_name):
 
-        if not aruba_ansible_module.running_config.has_key('Port'):
+        if 'Port' not in aruba_ansible_module.running_config.keys():
             aruba_ansible_module.running_config['Port'] = {}
 
         encoded_port_name = port_name.replace('/', "%2F")
-        if not aruba_ansible_module.running_config['Port'].has_key(encoded_port_name):
+        if encoded_port_name not in aruba_ansible_module.running_config['Port'].keys():  # NOQA
 
             aruba_ansible_module.running_config['Port'][encoded_port_name] = {
-                "name" : port_name
+                "name": port_name
             }
 
         return aruba_ansible_module
 
     def check_port_exists(self, aruba_ansible_module, port_name):
 
-        if not aruba_ansible_module.running_config.has_key('Port'):
+        if 'Port' not in aruba_ansible_module.running_config.keys():
             return False
 
         encoded_port_name = port_name.replace('/', "%2F")
-        if not aruba_ansible_module.running_config['Port'].has_key(encoded_port_name):
+        if encoded_port_name not in aruba_ansible_module.running_config['Port'].keys():  # NOQA
             return False
 
         return True
@@ -69,7 +75,8 @@ class Port:
             return aruba_ansible_module
 
         if not self.check_port_exists(aruba_ansible_module, port_name):
-            aruba_ansible_module.warnings.append("{} is not configured".format(port_name))
+            aruba_ansible_module.warnings.append("{port} is not configured"
+                                                 "".format(port=port_name))
             return aruba_ansible_module
 
         encoded_port_name = port_name.replace('/', "%2F")
@@ -81,21 +88,26 @@ class Port:
 
         if not self.check_port_exists(aruba_ansible_module, port_name):
 <<<<<<< HEAD
+<<<<<<< HEAD
             aruba_ansible_module.module.fail_json("{} is not configured".format(port_name))
 =======
+=======
+>>>>>>> a6a7d002c67b68d39183ff87414400ace9e49fc4
             aruba_ansible_module.module.fail_json(msg="{port} is not "
                                                       "configured"
                                                       "".format(port=port_name)
                                                   )
+<<<<<<< HEAD
 >>>>>>> b72fff9... Adds 10.4 support to modules
+=======
+>>>>>>> a6a7d002c67b68d39183ff87414400ace9e49fc4
             return aruba_ansible_module
 
         encoded_port_name = port_name.replace('/', "%2F")
 
-
         for key in port_fields.keys():
 
-            aruba_ansible_module.running_config['Port'][encoded_port_name][key] = port_fields[key]
+            aruba_ansible_module.running_config['Port'][encoded_port_name][key] = port_fields[key]  # NOQA
 
         return aruba_ansible_module
 
@@ -103,41 +115,54 @@ class Port:
 
         if not self.check_port_exists(aruba_ansible_module, port_name):
 <<<<<<< HEAD
+<<<<<<< HEAD
             aruba_ansible_module.module.fail_json("{} is not configured".format(port_name))
 =======
+=======
+>>>>>>> a6a7d002c67b68d39183ff87414400ace9e49fc4
             aruba_ansible_module.module.fail_json(msg="{port} is not "
                                                       "configured"
                                                       "".format(port=port_name)
                                                   )
+<<<<<<< HEAD
 >>>>>>> b72fff9... Adds 10.4 support to modules
+=======
+>>>>>>> a6a7d002c67b68d39183ff87414400ace9e49fc4
             return aruba_ansible_module
 
         encoded_port_name = port_name.replace('/', "%2F")
 
         for field_name in field_names:
-            aruba_ansible_module.running_config['Port'][encoded_port_name].pop(field_name)
+            aruba_ansible_module.running_config['Port'][encoded_port_name].pop(field_name)  # NOQA
 
         return aruba_ansible_module
 
-    def get_port_field_values(self, aruba_ansible_module, port_name, field_names):
+    def get_port_field_values(self, aruba_ansible_module, port_name,
+                              field_names):
 
         result = {}
         if not self.check_port_exists(aruba_ansible_module, port_name):
 <<<<<<< HEAD
+<<<<<<< HEAD
             aruba_ansible_module.module.fail_json("{} is not configured".format(port_name))
 =======
+=======
+>>>>>>> a6a7d002c67b68d39183ff87414400ace9e49fc4
             aruba_ansible_module.module.fail_json(msg="{port} is not "
                                                       "configured"
                                                       "".format(port=port_name)
                                                   )
+<<<<<<< HEAD
 >>>>>>> b72fff9... Adds 10.4 support to modules
+=======
+>>>>>>> a6a7d002c67b68d39183ff87414400ace9e49fc4
             return aruba_ansible_module
 
         encoded_port_name = port_name.replace('/', "%2F")
 
         for field_name in field_names:
-            if aruba_ansible_module.running_config["Port"][encoded_port_name].has_key(field_name):
-                result[field_name] = aruba_ansible_module.running_config["Port"][encoded_port_name][field_name]
+            if field_name in aruba_ansible_module.running_config["Port"][encoded_port_name].keys():  # NOQA
+                result[field_name] = aruba_ansible_module.running_config["Port"][encoded_port_name][field_name]  # NOQA
             else:
                 result[field_name] = ""
 
@@ -147,19 +172,13 @@ class Port:
 
         result = []
 
-        if not aruba_ansible_module.running_config.has_key("Port"):
+        if "Port" not in aruba_ansible_module.running_config.keys():
             return result
 
-        for encoded_port_name in aruba_ansible_module.running_config["Port"].keys():
+        for encoded_port_name in aruba_ansible_module.running_config["Port"].keys():  # NOQA
 
             port_name = encoded_port_name.replace("%2F", "/")
 
             result.append(port_name)
 
         return result
-
-
-
-
-
-

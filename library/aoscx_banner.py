@@ -1,6 +1,7 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 <<<<<<< HEAD
+<<<<<<< HEAD
 #
 # (C) Copyright 2019 Hewlett Packard Enterprise Development LP.
 #
@@ -17,6 +18,8 @@
 # specific language governing permissions and limitations
 # under the License.
 =======
+=======
+>>>>>>> a6a7d002c67b68d39183ff87414400ace9e49fc4
 
 # (C) Copyright 2019-2020 Hewlett Packard Enterprise Development LP.
 # GNU General Public License v3.0+
@@ -25,7 +28,10 @@
 from __future__ import (absolute_import, division, print_function)
 __metaclass__ = type
 
+<<<<<<< HEAD
 >>>>>>> b72fff9... Adds 10.4 support to modules
+=======
+>>>>>>> a6a7d002c67b68d39183ff87414400ace9e49fc4
 
 ANSIBLE_METADATA = {
     'metadata_version': '1.1',
@@ -40,21 +46,25 @@ version_added: "2.8"
 short_description: Create or Delete Banner configuration on AOS-CX
 description:
   - This modules provides configuration management of Banner on AOS-CX devices.
-author:
-  - Aruba Networks
+author: Aruba Networks (@ArubaNetworks)
 options:
   banner_type:
     description: Type of banner being configured on the switch.
     required: True
     choices: ['banner', 'banner_exec']
+    type: str
+
   state:
     description: Create or Delete Banner on the switch.
     default: create
     choices: ['create', 'delete']
     required: False
+    type: str
+
   banner:
     description : String to be configured as the banner.
     required: True
+    type: str
 '''
 
 EXAMPLES = '''
@@ -96,12 +106,13 @@ def main():
             if banner_type in aruba_ansible_module.running_config['System']["other_config"].keys():  # NOQA
                 aruba_ansible_module.running_config['System']["other_config"].pop(banner_type)  # NOQA
             else:
-                aruba_ansible_module.warnings.append("{} has already been "
+                aruba_ansible_module.warnings.append("{x} has already been "
                                                      "removed"
-                                                     "".format(banner_type))
+                                                     "".format(x=banner_type))
         else:
-            aruba_ansible_module.warnings.append("{} has already been "
-                                                 "removed".format(banner_type))
+            aruba_ansible_module.warnings.append("{x} has already been "
+                                                 "removed"
+                                                 "".format(x=banner_type))
 
         aruba_ansible_module.module.log('Banner is removed from the switch.')
 

@@ -11,10 +11,14 @@ Requirements
 * Python 2.7 or 3.5+
 * Ansible 2.8.1 or later  
 <<<<<<< HEAD
+<<<<<<< HEAD
 * Minimum supported AOS-CX firmware version 10.03
 =======
 * Minimum supported AOS-CX firmware version 10.03.
 >>>>>>> b72fff9... Adds 10.4 support to modules
+=======
+* Minimum supported AOS-CX firmware version 10.03.
+>>>>>>> a6a7d002c67b68d39183ff87414400ace9e49fc4
 * Enable REST on your AOS-CX device with the following commands:
     ```
     switch(config)# https-server rest access-mode read-write
@@ -124,6 +128,7 @@ Apache 2.0
 
 Author Information
 ------------------
-Madhusudan Pranav Venugopal (madhusudan-pranav-venugopal)  
-Yang Liu (yliu-aruba)  
-Tiffany Chiapuzio-Wong (tchiapuziowong)  
+ - Madhusudan Pranav Venugopal (@madhusudan-pranav-venugopal)
+ - Yang Liu (@yliu-aruba)
+ - Tiffany Chiapuzio-Wong (@tchiapuziowong)
+

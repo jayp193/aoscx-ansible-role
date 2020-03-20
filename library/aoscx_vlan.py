@@ -1,6 +1,7 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 <<<<<<< HEAD
+<<<<<<< HEAD
 #
 # (C) Copyright 2019 Hewlett Packard Enterprise Development LP.
 #
@@ -17,6 +18,8 @@
 # specific language governing permissions and limitations
 # under the License.
 =======
+=======
+>>>>>>> a6a7d002c67b68d39183ff87414400ace9e49fc4
 
 # (C) Copyright 2019-2020 Hewlett Packard Enterprise Development LP.
 # GNU General Public License v3.0+
@@ -26,7 +29,10 @@
 from __future__ import (absolute_import, division, print_function)
 __metaclass__ = type
 
+<<<<<<< HEAD
 >>>>>>> b72fff9... Adds 10.4 support to modules
+=======
+>>>>>>> a6a7d002c67b68d39183ff87414400ace9e49fc4
 
 ANSIBLE_METADATA = {
     'metadata_version': '1.1',
@@ -41,29 +47,32 @@ version_added: "2.8"
 short_description: Create or Delete VLAN configuration on AOS-CX
 description:
   - This modules provides configuration management of VLANs on AOS-CX devices.
-author:
-  - Aruba Networks
+author: Aruba Networks (@ArubaNetworks)
 options:
   vlan_id:
     description: The ID of this VLAN. Non-internal VLANs must have an 'id'
                  between 1 and 4094 to be effectively instantiated.
     required: true
+    type: int
   name:
     description: VLAN name
     required: false
+    type: str
   description:
     description: VLAN description
     required: false
+    type: str
   admin_state:
     description: The Admin State of the VLAN, options are 'up' and 'down'.
     required: false
     choices: ['up', 'down']
-    default: None
+    type: str
   state:
     description: Create or update or delete the VLAN.
     required: false
     choices: ['create', 'update', 'delete']
     default: create
+    type: str
 '''
 
 EXAMPLES = '''
@@ -95,8 +104,7 @@ def main():
         vlan_id=dict(type='int', required=True),
         name=dict(type='str', default=None),
         description=dict(type='str', default=None),
-        admin_state=dict(type='str', default=None, choices=[None,
-                                                            'up', 'down']),
+        admin_state=dict(type='str', default=None, choices=['up', 'down']),
         state=dict(type='str', default='create', choices=['create', 'delete',
                                                           'update'])
     )

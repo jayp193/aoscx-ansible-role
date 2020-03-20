@@ -1,5 +1,6 @@
-#!/usr/bin/python
+#!/usr/bin/env python
 # -*- coding: utf-8 -*-
+<<<<<<< HEAD
 <<<<<<< HEAD
 #
 # (C) Copyright 2019 Hewlett Packard Enterprise Development LP.
@@ -17,6 +18,8 @@
 # specific language governing permissions and limitations
 # under the License.
 =======
+=======
+>>>>>>> a6a7d002c67b68d39183ff87414400ace9e49fc4
 
 # (C) Copyright 2019-2020 Hewlett Packard Enterprise Development LP.
 # GNU General Public License v3.0+
@@ -26,11 +29,14 @@
 from __future__ import (absolute_import, division, print_function)
 __metaclass__ = type
 
+<<<<<<< HEAD
 >>>>>>> b72fff9... Adds 10.4 support to modules
+=======
+>>>>>>> a6a7d002c67b68d39183ff87414400ace9e49fc4
 
 DOCUMENTATION = """
 ---
-author: Aruba Networks
+author: Aruba Networks (@ArubaNetworks)
 httpapi: aoscx
 short_description: Use REST to push configs to CX devices
 description:
@@ -57,12 +63,10 @@ from ansible.module_utils.parsing.convert_bool import boolean
 from ansible.module_utils.six.moves.urllib.error import HTTPError
 from ansible.plugins.httpapi import HttpApiBase
 
-
-try:
-    from __main__ import display
-except ImportError:
-    from ansible.utils.display import Display
-    display = Display()
+# Removed the exception handling as only required pre 2.8 and collection is
+# supported in >= 2.9
+from ansible.utils.display import Display
+display = Display()
 
 
 class HttpApi(HttpApiBase):
@@ -78,12 +82,14 @@ class HttpApi(HttpApiBase):
 
     def login(self, username, password):
         self.set_no_proxy()
-        path = '/rest/v1/login?username='+username+'&password='+password
+        path = ('/rest/v1/login?username={username}'
+                '&password={password}'.format(username=username,
+                                              password=password))
         method = 'POST'
         headers = {}
 
-        _ = self.send_request(data=None, path=path, method=method,
-                              headers=headers)
+        self.send_request(data=None, path=path, method=method,
+                          headers=headers)
 
     def logout(self):
         path = '/rest/v1/logout'
@@ -134,6 +140,7 @@ class HttpApi(HttpApiBase):
             self.connection._auth = auth
         return response_data_json
 <<<<<<< HEAD
+<<<<<<< HEAD
 
     def get_running_config(self):
         if self.connection._connected:
@@ -153,3 +160,5 @@ class HttpApi(HttpApiBase):
             self.send_request(data=data, method=method, path=path)
 =======
 >>>>>>> b72fff9... Adds 10.4 support to modules
+=======
+>>>>>>> a6a7d002c67b68d39183ff87414400ace9e49fc4

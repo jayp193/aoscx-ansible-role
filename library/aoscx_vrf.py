@@ -1,6 +1,7 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 <<<<<<< HEAD
+<<<<<<< HEAD
 #
 # (C) Copyright 2019 Hewlett Packard Enterprise Development LP.
 #
@@ -17,6 +18,8 @@
 # specific language governing permissions and limitations
 # under the License.
 =======
+=======
+>>>>>>> a6a7d002c67b68d39183ff87414400ace9e49fc4
 
 # (C) Copyright 2019-2020 Hewlett Packard Enterprise Development LP.
 # GNU General Public License v3.0+
@@ -26,7 +29,10 @@
 from __future__ import (absolute_import, division, print_function)
 __metaclass__ = type
 
+<<<<<<< HEAD
 >>>>>>> b72fff9... Adds 10.4 support to modules
+=======
+>>>>>>> a6a7d002c67b68d39183ff87414400ace9e49fc4
 
 ANSIBLE_METADATA = {
     'metadata_version': '1.1',
@@ -41,17 +47,18 @@ version_added: "2.8"
 short_description: Create or Delete VRF configuration on AOS-CX
 description:
   - This modules provides configuration management of VRFs on AOS-CX devices.
-author:
-  - Aruba Networks
+author: Aruba Networks (@ArubaNetworks)
 options:
   name:
     description: The name of the VRF
     required: true
+    type: str
   state:
     description: Create or delete the VRF.
     required: false
     choices: ['create', 'delete']
     default: create
+    type: str
 '''
 
 EXAMPLES = '''

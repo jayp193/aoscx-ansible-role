@@ -1,6 +1,7 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 <<<<<<< HEAD
+<<<<<<< HEAD
 #
 # (C) Copyright 2019 Hewlett Packard Enterprise Development LP.
 #
@@ -17,6 +18,8 @@
 # specific language governing permissions and limitations
 # under the License.
 =======
+=======
+>>>>>>> a6a7d002c67b68d39183ff87414400ace9e49fc4
 
 # (C) Copyright 2019-2020 Hewlett Packard Enterprise Development LP.
 # GNU General Public License v3.0+
@@ -26,7 +29,10 @@
 from __future__ import (absolute_import, division, print_function)
 __metaclass__ = type
 
+<<<<<<< HEAD
 >>>>>>> b72fff9... Adds 10.4 support to modules
+=======
+>>>>>>> a6a7d002c67b68d39183ff87414400ace9e49fc4
 
 ANSIBLE_METADATA = {
     'metadata_version': '1.1',
@@ -41,35 +47,39 @@ version_added: "2.8"
 short_description: Apply/Remove ACL configuration on interfaces for AOS-CX.
 description:
   - This modules provides application management of Access Classifier Lists
-  on Interfaces on AOS-CX devices.
-author:
-  - Aruba Networks
+    on Interfaces on AOS-CX devices.
+author: Aruba Networks (@ArubaNetworks)
 options:
   acl_name:
     description: Name of the ACL being applied or removed from the interface.
     required: true
+    type: str
 
   acl_type:
     description: Type of ACL being applied or removed from the interfaces.
     choices: ['ipv4', 'ipv6', 'mac']
     required: true
+    type: str
 
   acl_interface_list:
     description: List of interfaces for which the ACL is to be applied or
       removed.
     required: true
+    type: list
 
   acl_direction:
     description: Direction for which the ACL is to be applied or removed.
     required: true
     choices: ['in', 'out']
     default: 'in'
+    type: str
 
   state:
     description: Create or delete the ACL configuration from the interfaces.
     required: false
     choices: ['create', 'delete']
     default: create
+    type: str
 '''
 
 EXAMPLES = '''
@@ -123,6 +133,7 @@ def main():
 
     for interface_name in acl_interface_list:
 <<<<<<< HEAD
+<<<<<<< HEAD
         if not interface.check_interface_exists(aruba_ansible_module,
                                                 interface_name):
             aruba_ansible_module.module.fail_json(msg="Interface {} is not "
@@ -130,11 +141,16 @@ def main():
                                                       "".format(interface_name)
                                                   )
 =======
+=======
+>>>>>>> a6a7d002c67b68d39183ff87414400ace9e49fc4
         if not port.check_port_exists(aruba_ansible_module, interface_name):
             aruba_ansible_module.module.fail_json(
                 msg="Interface {int} is not configured".format(
                     int=interface_name))
+<<<<<<< HEAD
 >>>>>>> b72fff9... Adds 10.4 support to modules
+=======
+>>>>>>> a6a7d002c67b68d39183ff87414400ace9e49fc4
 
         if (state == 'create') or (state == 'update'):
             update_type = 'insert'
@@ -145,19 +161,27 @@ def main():
             acl_direction, update_type)
 
         if update_type == 'insert':
-            aruba_ansible_module.module.log(msg="Attached ACL {} of type "
-                                                "{} to interface {}"
-                                                "".format(acl_name,
-                                                          acl_type,
-                                                          interface_name))
+            aruba_ansible_module.module.log(msg="Attached ACL {acl} of type "
+                                                "{type} to interface {int}"
+                                                "".format(acl=acl_name,
+                                                          type=acl_type,
+                                                          int=interface_name))
 
         if update_type == 'update':
-            aruba_ansible_module.module.log(msg="Updated ACL {} of type {} attached to interface {}".format(acl_name, acl_type, interface_name))  # NOQA
+            aruba_ansible_module.module.log(msg="Updated ACL {acl} of type "
+                                                "{type} attached to interface"
+                                                " {int}"
+                                                "".format(acl=acl_name,
+                                                          type=acl_type,
+                                                          int=interface_name))  # NOQA
 
         if (update_type == 'absent') or (update_type == 'delete'):
-            aruba_ansible_module.module.log(
-                msg="Removed ACL {} of type {} from interface {}".format(
-                    acl_name, acl_type, interface_name))
+            aruba_ansible_module.module.log(msg="Removed ACL {acl} of type"
+                                                " {type} from interface"
+                                                " {int}"
+                                                "".format(acl=acl_name,
+                                                          type=acl_type,
+                                                          int=interface_name))
 
     aruba_ansible_module.update_switch_config()
 
