@@ -27,12 +27,15 @@
 
 
 from __future__ import (absolute_import, division, print_function)
-__metaclass__ = type
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 >>>>>>> b72fff9... Adds 10.4 support to modules
 =======
 >>>>>>> a6a7d002c67b68d39183ff87414400ace9e49fc4
+=======
+__metaclass__ = type
+>>>>>>> da0d435... New modules and bug fixes
 
 DOCUMENTATION = """
 ---
@@ -66,6 +69,7 @@ from ansible.plugins.httpapi import HttpApiBase
 # Removed the exception handling as only required pre 2.8 and collection is
 # supported in >= 2.9
 from ansible.utils.display import Display
+
 display = Display()
 
 
@@ -128,7 +132,8 @@ class HttpApi(HttpApiBase):
             if response_data:
                 if 'errors' in response_data:
                     errors = response_data['errors']['error']
-                    error_text = '\n'.join((error['error-message'] for error in errors))  # NOQA
+                    error_text = '\n'.join(
+                        (error['error-message'] for error in errors))  # NOQA
                 else:
                     error_text = response_data
 
@@ -139,6 +144,7 @@ class HttpApi(HttpApiBase):
         if auth:
             self.connection._auth = auth
         return response_data_json
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
 
@@ -162,3 +168,10 @@ class HttpApi(HttpApiBase):
 >>>>>>> b72fff9... Adds 10.4 support to modules
 =======
 >>>>>>> a6a7d002c67b68d39183ff87414400ace9e49fc4
+=======
+
+    def get_capabilities(self):
+        result = {}
+
+        return json.dumps(result)
+>>>>>>> da0d435... New modules and bug fixes
